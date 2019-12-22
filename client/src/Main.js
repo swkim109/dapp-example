@@ -8,7 +8,7 @@ import Loader from 'react-loader-spinner';
 import axios from 'axios';
 
 import getWeb3 from './utils/getWeb3';
-import TruffleContract from 'truffle-contract';
+import TruffleContract from '@truffle/contract';
 import SimpleStorage from './contracts/SimpleStorage';
 
 import './css/bootstrap.min.css';

@@ -7,16 +7,16 @@ import Main from "./Main";
 
 class App extends Component {
 
-    render() {
+  render() {
 
-        return (
+    return (
 
-            <Router>
-                <Route exact path="/" component={Main} />
-            </Router>
+        <Router>
+          <Route exact path="/" component={Main} />
+        </Router>
 
-        );
-    }
+    );
+  }
 }
 
 

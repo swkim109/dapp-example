@@ -4,8 +4,8 @@ const { GANACHE, GANACHE_WS } = require('./eth.config');
 
 const web3 = new Web3(GANACHE);
 //const web3 = new Web3(new Web3.providers.WebsocketProvider(GANACHE_WS));
-const abi = require('../../../_frontend/src/contracts/SimpleStorage.json').abi;
-const address = require('../../../_frontend/src/contracts/SimpleStorage.json').networks["5777"].address;
+const abi = require('../../../client/src/contracts/SimpleStorage.json').abi;
+const address = require('../../../client/src/contracts/SimpleStorage.json').networks["5777"].address;
 
 
 set = async (ctx) => {
