@@ -1,11 +1,18 @@
-const ethTx = require('ethereumjs-tx');
+const ethTx = require('ethereumjs-tx').Transaction;
 const Web3 = require('web3');
-const { GANACHE, GANACHE_WS } = require('./eth.config');
+const { GANACHE_WS, GANACHE_NETWORK_ID } = require('./eth.config');
 
-const web3 = new Web3(GANACHE);
-//const web3 = new Web3(new Web3.providers.WebsocketProvider(GANACHE_WS));
+let NETWORK_ID;
+let PROVIDER;
+if (process.env.NODE_ENV === "development") {
+    PROVIDER = GANACHE_WS;
+    NETWORK_ID = GANACHE_NETWORK_ID;
+}
+
+//const web3 = new Web3(new Web3.providers.WebsocketProvider(PROVIDER));
+const web3 = new Web3(PROVIDER);
 const abi = require('../../../client/src/contracts/SimpleStorage.json').abi;
-const address = require('../../../client/src/contracts/SimpleStorage.json').networks["5777"].address;
+const address = require('../../../client/src/contracts/SimpleStorage.json').networks[NETWORK_ID].address;
 
 
 set = async (ctx) => {
@@ -58,8 +65,9 @@ setTx = async (ctx) => {
             gasPrice:web3.utils.toHex(web3.utils.toWei('20','gwei')),
         }
 
-        const tx = new ethTx(txObject);
+        const tx = new ethTx(txObject,  { chain: 'mainnet', hardfork: 'petersburg' });
         tx.sign(privateKey); // sign a transaction with a given private key(32 bytes)
+        console.log(tx.verifySignature());
         const serializedTx = tx.serialize();
 
         // web3.eth.sendSignedTransaction(signedTransactionData [, callback])

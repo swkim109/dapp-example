@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component, useEffect, useState} from 'react';
 
 import {Grid, Row, Col, Panel} from 'react-bootstrap';
-import {Button, ButtonGroup, ButtonToolbar} from 'react-bootstrap';
+import {Button, ButtonGroup, ButtonToolbar, Modal} from 'react-bootstrap';
 import {InputGroup, FormControl} from 'react-bootstrap';
 import Glyphicon from "react-bootstrap/lib/Glyphicon";
 import Loader from 'react-loader-spinner';
@@ -25,7 +25,9 @@ class Main extends Component {
 
         val: 0,
         storedData: '',
-        pending: false
+        pending: false,
+        show: false,
+        msg: ''
     };
 
     async componentDidMount() {
@@ -84,7 +86,7 @@ class Main extends Component {
 
             } catch (err) {
                 console.log(err.message);
-                this.setState({pending: false});
+                this.setState({pending: false, show: true, msg: err.message});
             }
         }
     }
@@ -107,6 +109,7 @@ class Main extends Component {
 
             } catch (err) {
                 console.log(err);
+                this.setState({pending: false, show: true, msg: err.message});
             }
         }
     }
@@ -119,12 +122,15 @@ class Main extends Component {
 
             try {
                 this.setState({pending: !this.state.pending});
+                //0xAd36301E8C66bB2Af80c63DA5a99BdF2c202c9a1
+                //0xAFc4F9F3bA806dd2F8e47A524fFDa2418bBFc08a
                 const result = await axios.post('/eth/setTx', {from: "0xAd36301E8C66bB2Af80c63DA5a99BdF2c202c9a1", val: this.state.val});
 
                 console.log(result);
 
             } catch (err) {
                 console.log(err);
+                this.setState({pending: false, show: true, msg: err.message});
             }
         }
 
@@ -154,6 +160,11 @@ class Main extends Component {
     }
 
 
+    handleClose = () => {
+        this.setState({show: false, msg: ''});
+    }
+
+
     render() {
 
         return (
@@ -163,7 +174,7 @@ class Main extends Component {
                     <Col md={5}>
                         <InputGroup style={{paddingBottom:'10px'}}>
                             <InputGroup.Addon>Value</InputGroup.Addon>
-                            <FormControl type="number" placeholder="Enter number" bsSize="lg" onChange={this.handleChange} />
+                            <FormControl type="number" placeholder="Enter number" bsSize="lg" onChange={this.handleChange} min={0} />
                         </InputGroup>
                     </Col>
                 </Row>
@@ -208,6 +219,7 @@ class Main extends Component {
                         </Panel>
                     </Col>
                 </Row>
+                <Message show={this.state.show} msg={this.state.msg} close={this.handleClose}/>
 
             </Grid>
 
@@ -219,3 +231,37 @@ class Main extends Component {
 
 export default Main;
 
+
+const Message = (props) => {
+
+    const [flag, setFlag] = useState(false);
+    const [msg, setMsg] = useState('');
+
+    useEffect(() => {
+
+        if (props.msg.toString().startsWith("Error")) {
+            setMsg('JSON-RPC or SERVER ERROR');
+        } else {
+            setMsg(props.msg);
+        }
+        setFlag(props.show);
+
+    }, [props.show]);
+
+    return (
+        <Modal show={flag} onHide={props.close}>
+            <Modal.Header closeButton>
+                <Modal.Title>
+                    Life is not easy for any of us <span role={"img"} aria-labelledby={"emoji"}>😅</span>
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                {msg}
+            </Modal.Body>
+            <Modal.Footer>
+                <Button onClick={props.close}>Close</Button>
+            </Modal.Footer>
+        </Modal>
+    )
+
+}

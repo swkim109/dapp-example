@@ -12,6 +12,7 @@ contract SimpleStorage {
     }
 
     function set(uint x) public {
+        require(x < 1000, "Should be less than 1000");
         storedData = x;
         emit Change("set", x);
     }
