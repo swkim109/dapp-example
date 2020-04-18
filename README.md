@@ -1,4 +1,4 @@
-## Sample project for inflearn.com
+### Sample project for inflearn.com
 
 Truffle 5.1.11 (core: 5.1.11)  
 Solidity ^0.5.8 (solc-js)  
