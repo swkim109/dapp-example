@@ -14,21 +14,23 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@truffle/hdwallet-provider": "^1.0.33",
+    "@truffle/hdwallet-provider": "^1.0.43",
     "ethereumjs-tx": "^2.1.2",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "openzeppelin-solidity": "^2.3.0",
-    "web3": "^1.2.1"
+    "web3": "^1.2.11"
   },
   "devDependencies": {
     "cross-env": "^5.2.0",
     "nodemon": "^2.0.2"
   },
   "nodemonConfig": {
-    "watch": ["src"],
+    "watch": [
+      "src"
+    ],
     "env": {
       "NODE_ENV": "development"
     },
