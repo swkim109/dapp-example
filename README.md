@@ -90,15 +90,12 @@ Web3.js 1.2.9
 `\dapp-example\client\src\Main.js`을 열어서 다음을 수정하십시오.
 
 ```javascript
-//TODO
-// from 부분을 메타마스크의 계정으로 변경하십시오.
 const result = await axios.post('/eth/setTx', {from: "0x6C1b...ca93", val: this.state.val});
 ```
 
 `\dapp-example\src\api\eth\eth.controller.js` 을 열어서 다음을 수정하십시오.
 
 ```javascript
-//TODO 메타마스크 계정의 개인키로 변경하십시오.
 const privateKey = Buffer.from("5316...3027", "hex");
 ```
 
