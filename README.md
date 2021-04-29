@@ -87,13 +87,13 @@ Web3.js 1.2.9
 
 서버측 서명의 경우는 전자서명에 필요한 개인키를 설정해야 합니다. 
 
-`\dapp-example\client\src\Main.js`을 열어서 다음을 수정하십시오. `from` 계정을 메타마스크의 계정으로 대체하십시오.
+`\dapp-example\client\src\Main.js`을 열어서 `from` 계정을 메타마스크의 계정으로 대체하십시오.
 
 ```javascript
 const result = await axios.post('/eth/setTx', {from: "0x6C1b...ca93", val: this.state.val});
 ```
 
-`\dapp-example\src\api\eth\eth.controller.js` 을 열어서 다음을 수정하십시오. 메타마스크 계정의 개인키로 변경하십시오.
+`\dapp-example\src\api\eth\eth.controller.js`을 열어서 위에서 선택한 메타마스크 계정의 개인키로 변경하십시오.
 
 ```javascript
 const privateKey = Buffer.from("5316...3027", "hex");
