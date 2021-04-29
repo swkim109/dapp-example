@@ -49,8 +49,10 @@ setTx = async (ctx) => {
     const {from, val} = ctx.request.body;
 
     const contract = new web3.eth.Contract(abi, address);
-    const privateKey = Buffer.from("5de6abc8439867acc2d5cf7fa9d5f0e8ebce2222b643926704ecca1641b5fd9f", "hex");
 
+    //TODO 메타마스크 계정의 개인키로 변경하십시오.
+    const privateKey = Buffer.from("53168617d2d746d9c591516a907f7f2406426577e5816b78e2a7b72be3103027", "hex");
+    
     try {
 
         const data = contract.methods.set(val).encodeABI();

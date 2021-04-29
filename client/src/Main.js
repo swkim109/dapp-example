@@ -122,9 +122,9 @@ class Main extends Component {
 
             try {
                 this.setState({pending: !this.state.pending});
-                //0xAd36301E8C66bB2Af80c63DA5a99BdF2c202c9a1
-                //0xAFc4F9F3bA806dd2F8e47A524fFDa2418bBFc08a
-                const result = await axios.post('/eth/setTx', {from: "0xAd36301E8C66bB2Af80c63DA5a99BdF2c202c9a1", val: this.state.val});
+                //TODO
+                // from 부분을 메타마스크의 계정으로 변경하십시오.
+                const result = await axios.post('/eth/setTx', {from: "0x6C1b86657256A2Bb548B11EE332049451ce5ca93", val: this.state.val});
 
                 console.log(result);
 
