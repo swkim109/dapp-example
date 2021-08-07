@@ -54,7 +54,7 @@ setTx = async (ctx) => {
     const contract = new web3.eth.Contract(abi, address);
     
     //TODO 서명하려는 계정의 개인키로 변경하십시오.
-    const privateKey = Buffer.from("409988a9e7e9097e5a42cb4b273e193958130f8e6a6cf7737307fc4ac5958899", "hex");
+    const privateKey = Buffer.from("4099...8899", "hex");
     
     try {
         
